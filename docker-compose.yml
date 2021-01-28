@@ -7,6 +7,16 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+    # Databases are often not exposed to the outside world, 
+    # but accessed by other other services. 
+    # Hence, publishing the Postgres port is not something you would often see in production.
+    # However, for testing across computers, we can set up port.
+    ports:
+      - "5432:5432"
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -16,3 +26,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+volumes:
+  db-data:
