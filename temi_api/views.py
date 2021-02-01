@@ -16,12 +16,16 @@ def current_datetime():
 
     return HttpResponse(html)
 
+
 @csrf_exempt
 def post_credential(request):
     if request.method == 'POST':
-        try:
-            data = json.loads(request.raw_post_data)
-            print(data)
-        except:
-            print('nope')
+        json_data = json.loads(request.body)
+        print(json_data)
+        # Credential.objects.all().delete()
+
+        serialNumber = json_data.get('serialNumber')
+        userJson = json_data.get('userJson')
+        credential = Credential.objects.create(serialNumber=serialNumber, userJson=userJson)
+        credential.save()
         return HttpResponse('yo')
