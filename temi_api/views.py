@@ -24,8 +24,8 @@ def post_credential(request):
         print(json_data)
         # Credential.objects.all().delete()
 
-        serialNumber = json_data.get('serialNumber')
-        userJson = json_data.get('userJson')
-        credential = Credential.objects.create(serialNumber=serialNumber, userJson=userJson)
+        serial_number = json_data.get('serial_number')
+        user_json = json_data.get('user_json')
+        credential = Credential.objects.create(serial_number=serial_number, user_json=user_json)
         credential.save()
         return HttpResponse('yo')

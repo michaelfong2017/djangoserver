@@ -3,5 +3,5 @@ from django.db import models
 
 # Create your models here.
 class Credential(models.Model):
-    serialNumber = models.CharField(max_length=100)
-    userJson = models.JSONField()
+    serial_number = models.CharField(primary_key=True, max_length=30)
+    user_json = models.JSONField()
